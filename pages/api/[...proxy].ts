@@ -14,7 +14,7 @@ export default async function handler(
 ) {
   try {
     await httpProxyMiddleware(req, res, {
-      target: 'http://localhost:3001',
+      target: 'http://localhost:3005',
       changeOrigin: true,
     }).then((response) => {
       if (response.statusCode === 401) {

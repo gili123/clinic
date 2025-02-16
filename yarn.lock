@@ -385,18 +385,25 @@
   dependencies:
     sparse-bitfield "^3.0.3"
 
-"@mui/core-downloads-tracker@^6.4.3":
-  version "6.4.3"
-  resolved "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-6.4.3.tgz"
-  integrity sha512-hlyOzo2ObarllAOeT1ZSAusADE5NZNencUeIvXrdQ1Na+FL1lcznhbxfV5He1KqGiuR8Az3xtCUcYKwMVGFdzg==
+"@mui/core-downloads-tracker@^6.4.4":
+  version "6.4.4"
+  resolved "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-6.4.4.tgz"
+  integrity sha512-r+J0EditrekkTtO2CnCBCOGpNaDYwJqz8lH4rj6o/anDcskZFJodBlG8aCJkS8DL/CF/9EHS+Gz53EbmYEnQbw==
 
-"@mui/material@^5.15.14 || ^6.0.0", "@mui/material@^6.4.3":
-  version "6.4.3"
-  resolved "https://registry.npmjs.org/@mui/material/-/material-6.4.3.tgz"
-  integrity sha512-ubtQjplbWneIEU8Y+4b2VA0CDBlyH5I3AmVFGmsLyDe/bf0ubxav5t11c8Afem6rkSFWPlZA2DilxmGka1xiKQ==
+"@mui/icons-material@^6.4.4":
+  version "6.4.4"
+  resolved "https://registry.npmjs.org/@mui/icons-material/-/icons-material-6.4.4.tgz"
+  integrity sha512-uF1chGaoFmYdRUomK6f8kgJfWosk9A3HXWiVD0vQm+2mE7f25eTQ1E8RRO11LXpnUBqu8Rbv/uGlpnjT/u1Ksg==
   dependencies:
     "@babel/runtime" "^7.26.0"
-    "@mui/core-downloads-tracker" "^6.4.3"
+
+"@mui/material@^5.15.14 || ^6.0.0", "@mui/material@^6.4.3", "@mui/material@^6.4.4":
+  version "6.4.4"
+  resolved "https://registry.npmjs.org/@mui/material/-/material-6.4.4.tgz"
+  integrity sha512-ISVPrIsPQsxnwvS40C4u03AuNSPigFeS2+n1qpuEZ94hDsdMi19dQM2JcC9CHEhXecSIQjP1RTyY0mPiSpSrFQ==
+  dependencies:
+    "@babel/runtime" "^7.26.0"
+    "@mui/core-downloads-tracker" "^6.4.4"
     "@mui/system" "^6.4.3"
     "@mui/types" "^7.2.21"
     "@mui/utils" "^6.4.3"
@@ -2594,6 +2601,11 @@ joi@^17.13.3:
     "@sideway/address" "^4.1.5"
     "@sideway/formula" "^3.0.1"
     "@sideway/pinpoint" "^2.0.0"
+
+js-cookie@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.npmjs.org/js-cookie/-/js-cookie-3.0.5.tgz"
+  integrity sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"

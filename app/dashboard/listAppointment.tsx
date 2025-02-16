@@ -52,7 +52,7 @@ const [selectedAppointmentId, setSelectedAppointmentId] = useState<string | null
                 </Typography>
             )}
             <List sx={{ gap: 2, display: 'flex', flexDirection: 'column' }}>
-                {appointments.map((appointment, index) => (
+                {appointments?.map((appointment, index) => (
                     <Card key={index} sx={{ 
                         width: '100%',
                         boxShadow: '0 2px 4px rgba(0,0,0,0.1)',

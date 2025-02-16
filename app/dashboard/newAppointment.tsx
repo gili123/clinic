@@ -12,19 +12,11 @@ import { useDepartment } from '../hooks/useDepartments';
 import { useAppointments } from '../hooks/useAppointments';
 import { Dayjs } from 'dayjs';
 import FormControl from '@mui/material/FormControl';
-import { Box, Button, InputLabel, Typography } from '@mui/material';
+import { Box, Button, IconButton, InputLabel, Typography } from '@mui/material';
 import Modal from '@mui/material/Modal';
-
-type Department = {
-    _id: string;
-    name: string;
-}
-
-type Doctor = {
-    _id: string;
-    firstName: string;
-    lastName: string;
-}
+import Snackbar from '@mui/material/Snackbar';
+import CloseIcon from '@mui/icons-material/Close';
+import { Department, Doctor } from '../types/Appointment';
 
 const DepartmentSelect = ({value, onChange}: {value: string, onChange: (value: string) => void})=> {
     const [departments, setDepartments] = useState<Department[]>([]);
@@ -34,8 +26,8 @@ const DepartmentSelect = ({value, onChange}: {value: string, onChange: (value: s
         getDepartments()
             .then(setDepartments)
             .catch(error => {
-                console.error(error);
-                setDepartments([]);
+                alert('שגיאה! אנא נסה שנית מאוחר יותר')
+                console.error(error.message);
             });
     }, []);
 
@@ -44,17 +36,21 @@ const DepartmentSelect = ({value, onChange}: {value: string, onChange: (value: s
     };
 
     const renderDepartments = () => {
-        return departments.map((department) => (
+        return departments?.map((department) => (
             <MenuItem key={department._id} value={department._id}>{department.name}</MenuItem>
         ));
     };
+
+    if (departments.length === 0) {
+        return <div>Loading...</div>
+    }
 
     return (
         <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">בחר מחלקה</InputLabel>
             <Select
                 labelId="demo-simple-select-label"
-                value={value}
+                value={value || ''}
                 label="בחר מחלקה"
                 onChange={handleChange}
                 sx={{ width: 200 }}
@@ -82,7 +78,7 @@ const DoctorSelect = ({value, onChange, doctors}: {value: string, onChange: (val
             <InputLabel id="demo-simple-select-label">בחר רופא</InputLabel>
             <Select
                 labelId="demo-simple-select-label"
-                value={value}
+                value={value || ''}
                 label="בחר רופא"
                 onChange={handleChange}
                 sx={{ width: 200 }}
@@ -95,6 +91,7 @@ const DoctorSelect = ({value, onChange, doctors}: {value: string, onChange: (val
 
 const NewAppointment = ({onChange}: {onChange: () => void}) => {
     const [open, setOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const [department, setDepartment] = useState<Department | null>(null);
     const [availableDays, setAvailableDays] = useState<number[]>([]);
     const [doctor, setDoctor] = useState<Doctor | null>(null);
@@ -167,16 +164,29 @@ const NewAppointment = ({onChange}: {onChange: () => void}) => {
         createAppointment(details)
         .then((response) => {
             onChange()
-            alert('הפגישה נוצרה בהצלחה')
+            setSnackbarMessage('הפגישה נוצרה בהצלחה')
         })
         .catch((error) => {
             if(error.msg) {
-                alert(error.msg)
+                setSnackbarMessage(error.msg)
             } else {
                 alert('שגיאה ביצירת הפגישה, נסה שנית מאוחר יותר')
             }
         })
     }
+
+    const action = (
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={() => setSnackbarMessage('')}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      );
 
     return (
         <div className='flex flex-col md:flex-row items-center md:items-start justify-between p-4 md:p-8 gap-4 md:gap-8'>
@@ -281,6 +291,12 @@ const NewAppointment = ({onChange}: {onChange: () => void}) => {
                     </Box>
                 </Box>
             </Modal>
+            <Snackbar
+                open={snackbarMessage !== ''}
+                onClose={() => setSnackbarMessage('')}
+                message={snackbarMessage}
+                action={action}
+            />
         </div>
     )
 }

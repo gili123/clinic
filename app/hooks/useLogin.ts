@@ -22,6 +22,7 @@ export const useLogin = () => {
           .then((response) => response.json())
           .then(async (responseJson: any) => {
             document.cookie = `access-token=${responseJson.accessToken}; path=/; max-age=${60 * 60 * 24 * 365}; secure; samesite=lax`;
+            document.cookie = `user-name=${responseJson.name}; path=/; max-age=${60 * 60 * 24 * 365}; secure; samesite=lax`;
             resolve(responseJson)
           })
           .catch(reject)

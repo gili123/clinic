@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import ClientToolbar from './ClientToolbar';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,16 +29,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-          <div className="fixed inset-0 -z-10">
-            <Image
-              src="/background.jpeg"
-              alt="רקע"
-              fill
-              style={{ objectFit: 'cover' }}
-              priority
-            />
-          </div>
-          {children}
+        <ClientToolbar />
+        <div className="fixed inset-0 -z-10">
+          <Image
+            src="/background.jpeg"
+            alt="רקע"
+            fill
+            style={{ objectFit: 'cover' }}
+            priority
+          />
+        </div>
+        {children}
       </body>
     </html>
   );

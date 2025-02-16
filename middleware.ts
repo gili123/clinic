@@ -2,13 +2,17 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+
+  const accessToken = request.cookies.get('access-token')
+  if (request.nextUrl.pathname === '/dashboard' || request.nextUrl.pathname === '/admin') {
+    if (!accessToken) {
+      return NextResponse.redirect(new URL('/', request.url))
+    }
+  }
+
   if (request.nextUrl.pathname.startsWith('/api') && 
       !request.nextUrl.pathname.startsWith('/api/user')) {
     try {
-      const accessToken = request.cookies.get('access-token')
-      if (!accessToken) {
-        return NextResponse.redirect(new URL('/', request.url))
-      }
       const requestHeaders = new Headers(request.headers)
       requestHeaders.set('Authorization', `Bearer ${accessToken?.value}`)
 
@@ -28,5 +32,10 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  
+  matcher: [
+    '/dashboard/:path*',
+    '/admin/:path*',
+    '/api/:path*',
+  ],
+
 }

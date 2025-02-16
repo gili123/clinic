@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 export default function Request(options) {
   return Http.getInstance(options)
 }
@@ -59,7 +61,6 @@ class Http {
   }
 
   async exec(url, method, body) {
-    console.log('Headers:', this.headers)
     const root = '/api/'
 
     this.applyMiddlewares()
@@ -67,12 +68,14 @@ class Http {
     return new Promise((resolve, reject) => {
         fetch(root + url, {
           method,
+          cache: 'no-store',
           headers: this.headers,
           body: body ? JSON.stringify(body) : null,
         })
           .then((response) => {
             if (response.status === 401) {
               window.location.href = '/';
+              Cookies.remove('access-token');
             }
             if (!response.ok) {
               return response.json().then((err) => {

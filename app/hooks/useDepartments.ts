@@ -7,7 +7,9 @@ export const useDepartment = () => {
         return request()
         .exec(`department`, 'GET')
         .then((response) => response.json())
-        .then(resolve)
+        .then((responseJson) => {
+          resolve(responseJson)
+      })
         .catch(reject)
         })
     }

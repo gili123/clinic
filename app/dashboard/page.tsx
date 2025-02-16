@@ -1,6 +1,5 @@
 'use client'
 import React, {useState, useEffect} from 'react';
-import { useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import AppBar from '@mui/material/AppBar'
 import Tabs from '@mui/material/Tabs';
@@ -45,7 +44,6 @@ function a11yProps(index: number) {
 
 export default function Home() {
     const [value, setValue] = useState(1)
-    const theme = useTheme()
     const [nextAppointments, setNextAppointments] = useState<any[]>([])
     const [pastAppointments, setPastAppointments] = useState<any[]>([])
     const { getAppintments } = useAppointments()
@@ -85,13 +83,13 @@ export default function Home() {
           <Tab label={`פגישות הבאות (${nextAppointments.length})`} dir='rtl' disabled={nextAppointments.length === 0} {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} dir={theme.direction}>
+      <TabPanel value={value} index={0} dir={'ltr'}>
         <ListAppointment type='lt' appointments={pastAppointments} setAppointments={setPastAppointments} />
       </TabPanel>
-      <TabPanel value={value} index={1} dir={theme.direction}>
+      <TabPanel value={value} index={1} dir={'ltr'}>
           <NewAppointment onChange={() => {fetchAppointments()}} />
       </TabPanel>
-      <TabPanel value={value} index={2} dir={theme.direction}>
+        <TabPanel value={value} index={2} dir={'ltr'}>
         <ListAppointment type='gt' appointments={nextAppointments} setAppointments={setNextAppointments} />
       </TabPanel>
     </Box>

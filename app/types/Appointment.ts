@@ -6,4 +6,15 @@ export interface Appointment {
   date: Date;
   startTime: string;
   endTime: string;
+},
+
+export type Department = {
+  _id: string;
+  name: string;
+}
+
+export type Doctor = {
+  _id: string;
+  firstName: string;
+  lastName: string;
 }
