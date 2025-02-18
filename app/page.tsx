@@ -52,7 +52,7 @@ export default function Home() {
   }, [code])
 
   const validatePhone = (phone: string): string => {
-    const regexPhone = new RegExp("^(05[01234578]{1}[\\s\\.\\-]?[1-9]{1}[0-9]{6})|(0[23489]{1}[\\s\\.\\-]?[1-9]{1}[0-9]{6})|(07[234678]{1}[\\s\\.\\-]?[0-9]{7})$")
+    const regexPhone = new RegExp("^((\\+972[- ]?|0)([23489]|5[0123456789])\\d{7}|\\+?[1-9]\\d{1,14})$")
     var error = ''
     if (!regexPhone.test(phone)) {
       error = 'טלפון לא חוקי'

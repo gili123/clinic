@@ -168,7 +168,7 @@ const NewAppointment = ({onChange}: {onChange: () => void}) => {
         })
         .catch((error) => {
             if(error.msg) {
-                setSnackbarMessage(error.msg)
+                alert(error.msg)
             } else {
                 alert('שגיאה ביצירת הפגישה, נסה שנית מאוחר יותר')
             }
